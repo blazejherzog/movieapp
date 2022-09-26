@@ -97,4 +97,11 @@ public class AuthController {
         model.addAttribute("comments", comments);
         return "comments";
     }
+
+    @GetMapping("/comments/{movieTitle}/form")
+    public String showCommentForm(Model model) {
+        CommentDto comment = new CommentDto();
+        model.addAttribute("comment", comment);
+        return "commentform";
+    }
 }

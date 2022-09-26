@@ -28,7 +28,7 @@ public class CommentController {
     public String saveComment(@Valid @ModelAttribute("comment")CommentDto commentDto, @PathVariable String movieTitle,
                               BindingResult result, Model model) {
         if (result.hasErrors()) {
-            model.addAttribute("movie", commentDto);
+            model.addAttribute("comment", commentDto);
             return "/comments";
         }
 

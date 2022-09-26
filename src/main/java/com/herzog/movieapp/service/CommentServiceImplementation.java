@@ -3,6 +3,8 @@ package com.herzog.movieapp.service;
 import com.herzog.movieapp.dto.CommentDto;
 import com.herzog.movieapp.entity.Comment;
 import com.herzog.movieapp.repository.CommentRepository;
+import com.herzog.movieapp.repository.MovieRepository;
+import com.herzog.movieapp.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -15,19 +17,23 @@ public class CommentServiceImplementation implements CommentService{
 
     private final CommentRepository commentRepository;
     private final ModelMapper modelMapper;
+    private final UserRepository userRepository;
+    private final MovieRepository movieRepository;
 
-    public CommentServiceImplementation(CommentRepository commentRepository, ModelMapper modelMapper) {
+    public CommentServiceImplementation(CommentRepository commentRepository, ModelMapper modelMapper, UserRepository userRepository, MovieRepository movieRepository) {
         this.commentRepository = commentRepository;
         this.modelMapper = modelMapper;
+        this.userRepository = userRepository;
+        this.movieRepository = movieRepository;
     }
 
     @Override
     public void saveComment(CommentDto commentDto) {
         Comment comment = new Comment();
-        comment.setUser(commentDto.getUserName().equals(comment.getUser().getName()) ? comment.getUser() : null);
-        comment.setMovie(commentDto.getMovieTitle().equals(comment.getMovie().getTitle()) ? comment.getMovie() : null);
+        comment.setUser(userRepository.findByName(commentDto.getUserName()));
+        comment.setMovie(movieRepository.findByTitle(commentDto.getMovieTitle()));
         comment.setDateTime(commentDto.getDateTime());
-        comment.setContent(comment.getContent());
+        comment.setContent(commentDto.getContent());
         commentRepository.save(comment);
     }
 

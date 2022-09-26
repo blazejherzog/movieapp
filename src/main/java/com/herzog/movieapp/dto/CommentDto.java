@@ -17,12 +17,13 @@ import java.time.LocalDateTime;
 public class CommentDto {
 
     private Long id;
-    @NotEmpty
+
     private String userName;
-    @NotEmpty
+
     private String movieTitle;
-    @NotEmpty
-    private LocalDateTime dateTime;
+
+    private LocalDateTime dateTime = LocalDateTime.now();
+
     @NotEmpty(message = "To have your comment submitted, please share your opinion")
     private String content;
 }
