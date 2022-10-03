@@ -101,7 +101,11 @@ public class AuthController {
     @GetMapping("/comments/{movieTitle}/form")
     public String showCommentForm(Model model) {
         CommentDto comment = new CommentDto();
+        List<UserDto> users = userService.findAllUsers();
+        List<MovieDto> movies = movieService.findAllMovies();
         model.addAttribute("comment", comment);
+        model.addAttribute("movies", movies);
+        model.addAttribute("users", users);
         return "commentform";
     }
 }

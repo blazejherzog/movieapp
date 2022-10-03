@@ -2,7 +2,6 @@ package com.herzog.movieapp.entity;
 
 
 import lombok.*;
-import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import javax.persistence.*;
 import java.util.ArrayList;

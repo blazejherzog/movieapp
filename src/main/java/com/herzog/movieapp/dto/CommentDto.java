@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
@@ -18,9 +19,9 @@ public class CommentDto {
 
     private Long id;
 
-    private String userName;
+    private User user;
 
-    private String movieTitle;
+    private Movie movie;
 
     private LocalDateTime dateTime = LocalDateTime.now();
 

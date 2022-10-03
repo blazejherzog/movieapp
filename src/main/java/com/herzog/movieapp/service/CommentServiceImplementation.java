@@ -1,11 +1,15 @@
 package com.herzog.movieapp.service;
 
 import com.herzog.movieapp.dto.CommentDto;
+import com.herzog.movieapp.dto.MovieDto;
 import com.herzog.movieapp.entity.Comment;
+import com.herzog.movieapp.entity.Movie;
+import com.herzog.movieapp.entity.User;
 import com.herzog.movieapp.repository.CommentRepository;
 import com.herzog.movieapp.repository.MovieRepository;
 import com.herzog.movieapp.repository.UserRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,8 +34,8 @@ public class CommentServiceImplementation implements CommentService{
     @Override
     public void saveComment(CommentDto commentDto) {
         Comment comment = new Comment();
-        comment.setUser(userRepository.findByName(commentDto.getUserName()));
-        comment.setMovie(movieRepository.findByTitle(commentDto.getMovieTitle()));
+        comment.setUser(commentDto.getUser());
+        comment.setMovie(commentDto.getMovie());
         comment.setDateTime(commentDto.getDateTime());
         comment.setContent(commentDto.getContent());
         commentRepository.save(comment);
