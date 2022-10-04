@@ -27,7 +27,6 @@ public class MovieServiceImplementation implements MovieService {
         movie.setGenre(movieDto.getGenre());
         movie.setReleaseDate(movieDto.getReleaseDate());
         movie.setAverageRating(movieDto.getAverageRating());
-        movie.setComments(commentRepository.findByMovieTitle(movieDto.getTitle()));
         movieRepository.save(movie);
 
     }
