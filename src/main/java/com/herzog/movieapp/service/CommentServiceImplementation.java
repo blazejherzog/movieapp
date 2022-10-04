@@ -34,8 +34,10 @@ public class CommentServiceImplementation implements CommentService{
     @Override
     public void saveComment(CommentDto commentDto) {
         Comment comment = new Comment();
-        comment.setUser(commentDto.getUser());
-        comment.setMovie(commentDto.getMovie());
+        Movie existingMovie = movieRepository.findByTitle(commentDto.getMovie().getTitle());
+        User existingUser = userRepository.findByEmail(commentDto.getUser().getEmail());
+        comment.setUser(existingUser);
+        comment.setMovie(existingMovie);
         comment.setDateTime(commentDto.getDateTime());
         comment.setContent(commentDto.getContent());
         commentRepository.save(comment);

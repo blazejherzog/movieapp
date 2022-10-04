@@ -99,7 +99,7 @@ public class AuthController {
     }
 
     @GetMapping("/comments/{movieTitle}/form")
-    public String showCommentForm(Model model) {
+    public String showCommentForm(Model model, @PathVariable String movieTitle) {
         CommentDto comment = new CommentDto();
         List<UserDto> users = userService.findAllUsers();
         List<MovieDto> movies = movieService.findAllMovies();

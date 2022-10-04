@@ -1,9 +1,12 @@
 package com.herzog.movieapp.service;
 
 import com.herzog.movieapp.dto.RatingDto;
+import com.herzog.movieapp.entity.Movie;
 import com.herzog.movieapp.entity.Rating;
+import com.herzog.movieapp.entity.User;
 import com.herzog.movieapp.repository.MovieRepository;
 import com.herzog.movieapp.repository.RatingRepository;
+import com.herzog.movieapp.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -15,17 +18,23 @@ public class RatingServiceImplementation implements RatingService{
 
     private final RatingRepository ratingRepository;
     private final ModelMapper modelMapper;
+    private final UserRepository userRepository;
+    private final MovieRepository movieRepository;
 
-    public RatingServiceImplementation(RatingRepository ratingRepository, ModelMapper modelMapper) {
+    public RatingServiceImplementation(RatingRepository ratingRepository, ModelMapper modelMapper, UserRepository userRepository, MovieRepository movieRepository) {
         this.ratingRepository = ratingRepository;
         this.modelMapper = modelMapper;
+        this.userRepository = userRepository;
+        this.movieRepository = movieRepository;
     }
 
     @Override
     public void saveRating(RatingDto ratingDto) {
         Rating rating = new Rating();
-        rating.setUser(rating.getUser().getName().equals(ratingDto.getUserName()) ? rating.getUser() : null);
-        rating.setMovie(rating.getMovie().getTitle().equals(ratingDto.getMovieTitle()) ? rating.getMovie() : null);
+        User existingUser = userRepository.findByName(ratingDto.getUserName());
+        Movie existingMovie = movieRepository.findByTitle(ratingDto.getMovieTitle());
+        rating.setUser(existingUser);
+        rating.setMovie(existingMovie);
         rating.setRate(ratingDto.getRate());
         ratingRepository.save(rating);
 
