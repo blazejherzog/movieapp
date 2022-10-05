@@ -45,6 +45,7 @@
                         th:action="@{/register/save}"
                         th:object="${user}"
                 >
+                    <input type="hidden" th:field="*{name}" th:value="$user.name">
                     <div class="form-group mb-3">
                         <label class="form-label">First Name</label>
                         <input

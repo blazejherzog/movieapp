@@ -40,6 +40,7 @@
                         th:action="@{/comments/{movieTitle}/form/save}"
                         th:object="${comment}"
                 >
+                    <input type="hidden" th:field="*{id}" th:value="$comment.id">
 
                     <div class="form-group mb-3">
                         <label class="form-label">Comment</label>
