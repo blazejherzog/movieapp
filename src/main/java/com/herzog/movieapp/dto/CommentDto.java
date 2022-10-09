@@ -19,9 +19,9 @@ public class CommentDto {
 
     private Long id;
 
-    private User user;
+    private String userEmail;
 
-    private Movie movie;
+    private String movieTitle;
 
     private LocalDateTime dateTime = LocalDateTime.now();
 

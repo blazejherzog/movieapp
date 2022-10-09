@@ -33,6 +33,6 @@ public class CommentController {
         }
 
         commentService.saveComment(commentDto);
-        return "redirect:/comments/{movieTitle}";
+        return "redirect:/movies";
     }
 }

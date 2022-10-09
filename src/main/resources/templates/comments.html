@@ -31,6 +31,13 @@
                 </li>
             </ul>
         </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent3">
+            <ul class="navbar-nav me-auto mb-0 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/movies}">Movies</a>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>
 <div class="container">
@@ -43,14 +50,14 @@
             <th>Movie Title</th>
             <th>User Name</th>
             <th>Date Time</th>
-            <th>Content</th>
+            <th width="700px">Content</th>
 
         </tr>
         </thead>
         <tbody>
         <tr th:each = "comment : ${comments}">
-            <td th:text = "${comment.movie.title}"></td>
-            <td th:text = "${comment.user.username}"></td>
+            <td th:text = "${comment.movieTitle}"></td>
+            <td th:text = "${comment.userEmail}"></td>
             <td th:text = "${comment.dateTime}"></td>
             <td th:text = "${comment.content}"></td>
         </tr>

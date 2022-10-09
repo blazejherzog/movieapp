@@ -44,16 +44,19 @@
             <th>Genre</th>
             <th>Release Date</th>
             <th>Average Rating</th>
+            <th>Comments</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each = "movie : ${movies}">
-            <td> <a th:text = "${movie.title}"
-                 th:href = "@{'/comments/' + ${movie.title}}" ></a>
-            </td>
+            <td th:text = "${movie.title}"></td>
             <td th:text = "${movie.genre}"></td>
             <td th:text = "${movie.releaseDate}"></td>
             <td th:text = "${movie.averageRating}"></td>
+            <td>
+                <a th:href = "@{'/comments/' + ${movie.title}}" >Show Comments</a>
+            </td>
+
         </tr>
         </tbody>
     </table>

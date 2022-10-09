@@ -33,6 +33,6 @@ public class Movie {
     @Column
     private int averageRating;
 
-    @OneToMany(mappedBy = "movie")
-    private List<Comment> comments = new ArrayList<>();
+//    @OneToMany(mappedBy = "movie")
+//    private List<Comment> comments = new ArrayList<>();
 }
