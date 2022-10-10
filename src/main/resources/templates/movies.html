@@ -45,6 +45,8 @@
             <th>Release Date</th>
             <th>Average Rating</th>
             <th>Comments</th>
+            <th></th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -55,6 +57,12 @@
             <td th:text = "${movie.averageRating}"></td>
             <td>
                 <a th:href = "@{'/comments/' + ${movie.title}}" >Show Comments</a>
+            </td>
+            <td>
+                <a th:href="@{'/movies/edit/' + ${movie.title}}">Edit</a>
+            </td>
+            <td>
+                <a th:href="@{'/movies/delete/' + ${movie.title}}">Delete</a>
             </td>
 
         </tr>

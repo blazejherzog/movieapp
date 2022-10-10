@@ -53,6 +53,12 @@ public class CommentServiceImplementation implements CommentService{
     }
 
     @Override
+    public Comment findCommentById(Long id) {
+        Comment comment = commentRepository.findById(id).get();
+        return comment;
+    }
+
+    @Override
     public void deleteComment(Long commentId) {
         Optional<Comment> existingComment = commentRepository.findById(commentId);
         if (existingComment.isPresent()) {

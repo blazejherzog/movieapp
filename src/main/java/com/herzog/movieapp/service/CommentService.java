@@ -10,5 +10,6 @@ public interface CommentService {
 
     void saveComment(CommentDto commentDto);
     List<CommentDto> findCommentsByMovieTitle(String movieTitle);
+    Comment findCommentById(Long id);
     void deleteComment(Long commentId);
 }

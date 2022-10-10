@@ -30,16 +30,20 @@
 <div class="container">
     <div class="row col-md-8 offset-md-2">
         <div class="card">
-            <div class="card-header">
+            <div class="card-header" th:if="${comment.id == null}">
                 <h2 class="text-center">Leave your comment</h2>
+            </div>
+            <div class="card-header" th:unless="${comment.id == null}">
+                <h2 class="text-center">Edit your comment</h2>
             </div>
             <div class="card-body">
                 <form
                         method="post"
                         role="form"
-                        th:action="@{/comments/{movieTitle}/form/save}"
+                        th:action="@{/comments/form/save}"
                         th:object="${comment}"
                 >
+                    <input type="hidden" th:field="*{id}" th:value="${comment.id}" />
                     <div class="form-group mb-3">
                         <label class="form-label">User</label>
                         <input
@@ -81,8 +85,6 @@
                         <p th:errors = "*{content}" class="text-danger"
                            th:if="${#fields.hasErrors('content')}"></p>
                     </div>
-
-
 
                     <div class="form-group">
                         <button class="btn btn-primary" type="submit">Save</button>
