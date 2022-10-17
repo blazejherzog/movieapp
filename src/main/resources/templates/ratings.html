@@ -27,7 +27,14 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent2">
             <ul class="navbar-nav me-auto mb-0 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/movies/form}">Add Movie</a>
+                    <a class="nav-link active" aria-current="page" th:href="@{/ratings/form}">Rate Movie</a>
+                </li>
+            </ul>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent3">
+            <ul class="navbar-nav me-auto mb-0 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/movies}">Movies</a>
                 </li>
             </ul>
         </div>
@@ -35,40 +42,30 @@
 </nav>
 <div class="container">
     <div class="row col-md-10">
-        <h2>MOVIES</h2>
+        <h2>RATINGS</h2>
     </div>
     <table class="table table-bordered table-hover">
         <thead class="table-dark">
         <tr>
-            <th>Title</th>
-            <th>Genre</th>
-            <th>Release Date</th>
-            <th>Average Rating</th>
-            <th>Comments</th>
-            <th>Ratings</th>
+            <th>Movie Title</th>
+            <th>User Name</th>
+            <th>Rate</th>
             <th></th>
             <th></th>
+
         </tr>
         </thead>
         <tbody>
-        <tr th:each = "movie : ${movies}">
-            <td th:text = "${movie.title}"></td>
-            <td th:text = "${movie.genre}"></td>
-            <td th:text = "${movie.releaseDate}"></td>
-            <td th:text = "${movie.averageRating}"></td>
+        <tr th:each = "rating : ${ratings}">
+            <td th:text = "${rating.movieTitle}"></td>
+            <td th:text = "${rating.userEmail}"></td>
+            <td th:text = "${rating.rate}"></td>
             <td>
-                <a th:href = "@{'/comments/' + ${movie.title}}" >Show Comments</a>
+                <a th:href="@{'/rates/edit/' + ${rate.id}}">Edit</a>
             </td>
             <td>
-                <a th:href = "@{'/ratings/' + ${movie.title}}" >Show Ratings</a>
+                <a th:href="@{'/rates/delete/' + ${rate.id}}">Delete</a>
             </td>
-            <td>
-                <a th:href="@{'/movies/edit/' + ${movie.title}}">Edit</a>
-            </td>
-            <td>
-                <a th:href="@{'/movies/delete/' + ${movie.title}}">Delete</a>
-            </td>
-
         </tr>
         </tbody>
     </table>

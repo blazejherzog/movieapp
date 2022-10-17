@@ -11,6 +11,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,44 +32,48 @@ public class RatingServiceImplementation implements RatingService{
     @Override
     public void saveRating(RatingDto ratingDto) {
         Rating rating = new Rating();
-        User existingUser = userRepository.findByName(ratingDto.getUserName());
+        User existingUser = userRepository.findByEmail(ratingDto.getUserEmail());
         Movie existingMovie = movieRepository.findByTitle(ratingDto.getMovieTitle());
         rating.setUser(existingUser);
         rating.setMovie(existingMovie);
         rating.setRate(ratingDto.getRate());
         ratingRepository.save(rating);
-
+        existingMovie.setAverageRating(countAverageRatingByMovieTitle(existingMovie.getTitle()));
+        movieRepository.flush();
     }
 
     @Override
-    public List<RatingDto> findAllRatingsByMovieTitle(String title) {
-        List<Rating> ratings = ratingRepository.findByMovieTitle(title);
+    public List<RatingDto> findAllRatingsByMovieTitle(String movieTitle) {
+        List<Rating> ratings = ratingRepository.findByMovieTitle(movieTitle);
         return ratings.stream()
                 .map(rating -> modelMapper.map(rating, RatingDto.class))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public int countAverageRatingByMovieTitle(String title) {
-        List<Rating> ratings = ratingRepository.findByMovieTitle(title);
+    public int countAverageRatingByMovieTitle(String movieTitle) {
+        List<Rating> ratings = ratingRepository.findByMovieTitle(movieTitle);
         List<Integer> values = ratings.stream().map(rating -> rating.getRate()).collect(Collectors.toList());
-        int sum = 0;
-        int avg = 0;
-        for (int value : values) {
-            sum += value;
+        if (values.size() == 0) {
+            return 0;
+        } else {
+            int sum = 0;
+            int avg = 0;
+            for (int value : values) {
+                sum += value;
+            }
+            avg = sum / values.size();
+            return avg;
         }
-        avg = sum / values.size();
-        return avg;
     }
 
     @Override
-    public void deleteRating(String movieTitle) {
-        List<Rating> ratingsByTitle = ratingRepository.findByMovieTitle(movieTitle);
-        for (Rating rating : ratingsByTitle) {
-            if (rating.getMovie().getTitle().equals(movieTitle)) {
-                ratingRepository.delete(rating);
-            }
+    public void deleteRating(Long id) {
+        Optional<Rating> existingRating = ratingRepository.findById(id);
+        if (existingRating.isPresent()) {
+            ratingRepository.delete(existingRating.get());
         }
-
+        existingRating.get().getMovie().setAverageRating(countAverageRatingByMovieTitle(existingRating.get().getMovie().getTitle()));
+        movieRepository.flush();
     }
 }

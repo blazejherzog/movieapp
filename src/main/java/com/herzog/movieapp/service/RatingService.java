@@ -10,5 +10,5 @@ public interface RatingService {
     void saveRating(RatingDto ratingDto);
     List<RatingDto> findAllRatingsByMovieTitle(String title);
     int countAverageRatingByMovieTitle(String title);
-    void deleteRating(String movieTitle);
+    void deleteRating(Long id);
 }

@@ -16,7 +16,6 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@RequestMapping("/comments")
 public class CommentController {
 
     private final CommentService commentService;
@@ -67,6 +66,12 @@ public class CommentController {
         }
 
         commentService.saveComment(commentDto);
+        return "redirect:/movies";
+    }
+
+    @GetMapping("/comments/delete/{id}")
+    public String deleteComment(@PathVariable("id") Long id, Model model) {
+        commentService.deleteComment(id);
         return "redirect:/movies";
     }
 }

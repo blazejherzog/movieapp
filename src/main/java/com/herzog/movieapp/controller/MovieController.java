@@ -13,7 +13,6 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@RequestMapping("/movies")
 public class MovieController {
 
     private final MovieService movieService;

@@ -40,7 +40,7 @@
                 <form
                         method="post"
                         role="form"
-                        th:action="@{/ratings/{movieTitle}/form/save}"
+                        th:action="@{/ratings/form/save}"
                         th:object="${rating}"
                 >
                     <input type="hidden" th:field="*{id}" th:value="${rating.id}">
@@ -83,7 +83,7 @@
                                 type="number"
                         />
                         <p th:errors = "*{rate}" class="text-danger"
-                           th:if="${#fields.hasErrors('title')}"></p>
+                           th:if="${#fields.hasErrors('rate')}"></p>
                     </div>
 
 

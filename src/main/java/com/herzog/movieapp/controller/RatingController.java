@@ -16,7 +16,6 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@RequestMapping("/ratings")
 public class RatingController {
 
     private final RatingService ratingService;
@@ -40,7 +39,7 @@ public class RatingController {
         return "rating_form";
     }
 
-    @PostMapping("/form/save")
+    @PostMapping("/ratings/form/save")
     public String saveRating(@Valid @ModelAttribute("rating") RatingDto ratingDto,
                              BindingResult result, Model model) {
         Movie existingMovie = movieService.findMovieByTitle(ratingDto.getMovieTitle());
@@ -50,6 +49,13 @@ public class RatingController {
         }
         ratingService.saveRating(ratingDto);
         existingMovie.setAverageRating(ratingService.countAverageRatingByMovieTitle(ratingDto.getMovieTitle()));
-        return "redirect:/ratings/{movieTitle}";
+        return "redirect:/movies";
+    }
+
+    @GetMapping("/ratings/{movieTitle}")
+    public String ratings(@PathVariable String movieTitle, Model model) {
+        List<RatingDto> ratings = ratingService.findAllRatingsByMovieTitle(movieTitle);
+        model.addAttribute("ratings", ratings);
+        return "ratings";
     }
 }

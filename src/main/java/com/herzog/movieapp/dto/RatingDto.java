@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.*;
 
 @Getter
 @Setter
@@ -14,10 +14,13 @@ import javax.validation.constraints.NotEmpty;
 public class RatingDto {
 
     private Long id;
-    @NotEmpty
-    private String userName;
-    @NotEmpty
+
+    private String userEmail;
+
     private String movieTitle;
-    @NotEmpty(message = "Please leave a rating from 0 to 100")
+
+    @NotNull(message = "Please leave a rating from 1 to 100")
+    @Min(1)
+    @Max(100)
     private int rate;
 }
