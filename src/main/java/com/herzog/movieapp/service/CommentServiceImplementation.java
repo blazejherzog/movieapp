@@ -65,4 +65,16 @@ public class CommentServiceImplementation implements CommentService{
             commentRepository.delete(existingComment.get());
         }
     }
+
+    @Override
+    public void updateComment(Long commentId, CommentDto commentDto) {
+        Comment existingComment = commentRepository.findById(commentId).get();
+        User existingUser = userRepository.findByEmail(commentDto.getUserEmail());
+        Movie existingMovie = movieRepository.findByTitle(commentDto.getMovieTitle());
+        existingComment.setUser(existingUser);
+        existingComment.setMovie(existingMovie);
+        existingComment.setDateTime(commentDto.getDateTime());
+        existingComment.setContent(commentDto.getContent());
+        commentRepository.flush();
+    }
 }

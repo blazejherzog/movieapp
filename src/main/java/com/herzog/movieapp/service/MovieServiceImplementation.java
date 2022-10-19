@@ -7,6 +7,7 @@ import com.herzog.movieapp.repository.MovieRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -66,6 +67,15 @@ public class MovieServiceImplementation implements MovieService {
     public void deleteMovie(String movieTitle) {
         Movie existingMovie = movieRepository.findByTitle(movieTitle);
         movieRepository.delete(existingMovie);
+    }
+
+    @Override
+    public void updateMovie(String movieTitle, MovieDto movieDto) {
+        Movie existingMovie = movieRepository.findByTitle(movieTitle);
+        existingMovie.setTitle(movieDto.getTitle());
+        existingMovie.setGenre(movieDto.getGenre());
+        existingMovie.setReleaseDate(movieDto.getReleaseDate());
+        movieRepository.flush();
     }
 
     private MovieDto mapToMovieDto (Movie movie) {

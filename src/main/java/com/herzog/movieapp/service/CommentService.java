@@ -12,4 +12,5 @@ public interface CommentService {
     List<CommentDto> findCommentsByMovieTitle(String movieTitle);
     Comment findCommentById(Long id);
     void deleteComment(Long commentId);
+    void updateComment(Long commentId, CommentDto commentDto);
 }

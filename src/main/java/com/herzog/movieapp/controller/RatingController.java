@@ -58,4 +58,10 @@ public class RatingController {
         model.addAttribute("ratings", ratings);
         return "ratings";
     }
+
+    @GetMapping("/ratings/delete/{id}")
+    public String deleteRating(@PathVariable("id") Long id, Model model) {
+        ratingService.deleteRating(id);
+        return "redirect:/movies";
+    }
 }

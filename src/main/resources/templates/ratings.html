@@ -61,10 +61,10 @@
             <td th:text = "${rating.userEmail}"></td>
             <td th:text = "${rating.rate}"></td>
             <td>
-                <a th:href="@{'/rates/edit/' + ${rate.id}}">Edit</a>
+                <a th:href="@{'/ratings/edit/' + ${rating.id}}">Edit</a>
             </td>
             <td>
-                <a th:href="@{'/rates/delete/' + ${rate.id}}">Delete</a>
+                <a th:href="@{'/ratings/delete/' + ${rating.id}}">Delete</a>
             </td>
         </tr>
         </tbody>

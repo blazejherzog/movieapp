@@ -13,4 +13,5 @@ public interface MovieService {
     List<MovieDto> findMoviesByGenre(String genre);
     List<MovieDto> findMovieByRatingAbove(int rating);
     void deleteMovie(String movieTitle);
+    void updateMovie(String movieTitle, MovieDto movieDto);
 }
