@@ -48,7 +48,7 @@ public class CommentController {
 
     @GetMapping("/comments/edit/{id}")
     public String showEditCommentForm(@PathVariable("id") Long id, Model model) {
-        Comment comment = commentService.findCommentById(id);
+        CommentDto comment = commentService.findCommentById(id);
         model.addAttribute("comment", comment);
         List<MovieDto> movies = movieService.findAllMovies();
         model.addAttribute("movies", movies);

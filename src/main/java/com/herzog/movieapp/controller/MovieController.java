@@ -2,8 +2,8 @@ package com.herzog.movieapp.controller;
 
 import com.herzog.movieapp.dto.MovieDto;
 import com.herzog.movieapp.entity.Movie;
+import com.herzog.movieapp.repository.MovieRepository;
 import com.herzog.movieapp.service.MovieService;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,9 +16,11 @@ import java.util.List;
 public class MovieController {
 
     private final MovieService movieService;
+    private final MovieRepository movieRepository;
 
-    public MovieController(MovieService movieService) {
+    public MovieController(MovieService movieService, MovieRepository movieRepository) {
         this.movieService = movieService;
+        this.movieRepository = movieRepository;
     }
 
     @GetMapping("/movies/form")

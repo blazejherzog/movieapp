@@ -53,9 +53,9 @@ public class CommentServiceImplementation implements CommentService{
     }
 
     @Override
-    public Comment findCommentById(Long id) {
+    public CommentDto findCommentById(Long id) {
         Comment comment = commentRepository.findById(id).get();
-        return comment;
+        CommentDto commentDto = this.modelMapper.map(comment, CommentDto.class); return commentDto;
     }
 
     @Override
