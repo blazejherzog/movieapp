@@ -30,13 +30,6 @@ public class MovieController {
         return "movie_form";
     }
 
-    @GetMapping("/movies/edit/{movieTitle}")
-    public String showEditMovieForm(@PathVariable("movieTitle") String movieTitle, Model model) {
-        Movie movie = movieService.findMovieByTitle(movieTitle);
-        model.addAttribute("movie", movie);
-        return "movie_form";
-    }
-
     @GetMapping("/movies")
     public String movies(Model model) {
         List<MovieDto> movies = movieService.findAllMovies();

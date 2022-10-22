@@ -9,6 +9,7 @@ public interface MovieService {
 
     void saveMovie(MovieDto movieDto);
     Movie findMovieByTitle(String title);
+    Movie findMovieById(Long id);
     List<MovieDto> findAllMovies();
     List<MovieDto> findMoviesByGenre(String genre);
     List<MovieDto> findMovieByRatingAbove(int rating);

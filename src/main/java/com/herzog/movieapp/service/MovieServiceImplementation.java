@@ -38,6 +38,12 @@ public class MovieServiceImplementation implements MovieService {
     }
 
     @Override
+    public Movie findMovieById(Long id) {
+        Movie movie = movieRepository.findById(id).get();
+        return movie;
+    }
+
+    @Override
     public List<MovieDto> findAllMovies() {
         List<Movie> movies = movieRepository.findAll();
         return movies.stream()
@@ -67,6 +73,7 @@ public class MovieServiceImplementation implements MovieService {
     public void deleteMovie(String movieTitle) {
         Movie existingMovie = movieRepository.findByTitle(movieTitle);
         movieRepository.delete(existingMovie);
+
     }
 
     @Override

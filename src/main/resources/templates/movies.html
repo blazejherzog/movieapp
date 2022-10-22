@@ -47,7 +47,6 @@
             <th>Comments</th>
             <th>Ratings</th>
             <th></th>
-            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -61,9 +60,6 @@
             </td>
             <td>
                 <a th:href = "@{'/ratings/' + ${movie.title}}" >Show Ratings</a>
-            </td>
-            <td>
-                <a th:href="@{'/movies/edit/' + ${movie.title}}">Edit</a>
             </td>
             <td>
                 <a th:href="@{'/movies/delete/' + ${movie.title}}">Delete</a>
